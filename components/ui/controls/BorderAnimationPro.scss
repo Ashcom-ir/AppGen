@@ -1,0 +1,61 @@
+.fancy::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  background: conic-gradient(transparent 180deg,
+      #cf0b59,
+      #f29b81,
+      #ffd166,
+      #06d6a0,
+      #118ab2,
+      #720cf8);
+  animation: rotate 2s linear infinite, hueShift 5s linear infinite;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  filter: blur(40px);
+}
+.fancy-border-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.fancy::after {
+  --offset: 2px;
+  content: "";
+  position: absolute;
+  width: calc(100% - 2 * var(--offset));
+  height: calc(100% - 2 * var(--offset));
+  inset: var(--offset);
+  background: inherit;
+  border-radius: inherit;
+  filter: blur(1px);
+}
+
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+  }
+}
+
+@keyframes hueShift {
+  0% {
+    filter: hue-rotate(0deg) blur(20px);
+  }
+
+  50% {
+    filter: hue-rotate(180deg) blur(20px);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) blur(20px);
+  }
+}

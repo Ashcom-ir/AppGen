@@ -1,0 +1,182 @@
+/* ============================
+   Overlay
+============================ */
+.custome-modal-overlay {
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.custome-modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================
+   Base Modal
+============================ */
+.custome-modal {
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+}
+
+/* ============================
+   Fade
+============================ */
+.custome-modal.fade {
+  transform: scale(1);
+  opacity: 0;
+}
+
+.custome-modal.fade.show {
+  opacity: 1;
+}
+
+/* ============================
+   Slide Right
+============================ */
+.custome-modal.slide-right {
+  transform: translateX(120%) scale(1);
+  opacity: 0;
+}
+
+.custome-modal.slide-right.show {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+/* ✅ Slide Left (جدید) */
+.custome-modal.slide-left {
+  transform: translateX(-120%) scale(1);
+  opacity: 0;
+}
+
+.custome-modal.slide-left.show {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+/* ============================
+   Slide Bottom
+============================ */
+.custome-modal.slide-bottom {
+  transform: translateY(120%) scale(1);
+  opacity: 0;
+}
+
+.custome-modal.slide-bottom.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ============================
+   Newspaper
+============================ */
+.custome-modal.newspaper {
+  transform: scale(0.1) rotate(720deg);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.custome-modal.newspaper.show {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* ============================
+   Flip Horizontal
+============================ */
+.custome-modal.flip-horizontal {
+  transform: rotateY(90deg);
+  opacity: 0;
+}
+
+.custome-modal.flip-horizontal.show {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+/* ============================
+   Flip Vertical
+============================ */
+.custome-modal.flip-vertical {
+  transform: rotateX(90deg);
+  opacity: 0;
+}
+
+.custome-modal.flip-vertical.show {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
+/* ============================
+   Just Me
+============================ */
+.custome-modal.justme {
+  transform: scale(0.1) rotate(-720deg) translateY(-200%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    opacity 0.8s ease;
+}
+
+.custome-modal.justme.show {
+  transform: scale(1) rotate(0deg) translateY(0);
+  opacity: 1;
+}
+
+/* ============================
+   Make Way
+============================ */
+.custome-modal.makeway {
+  transform: translateX(-100%) scale(0.5) rotate(-45deg);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.55, 0.06, 0.68, 0.19),
+    opacity 0.6s ease;
+}
+
+.custome-modal.makeway.show {
+  transform: translateX(0) scale(1) rotate(0deg);
+  opacity: 1;
+}
+/* ============================
+   Enter Right → Exit Left
+============================ */
+.custome-modal.enter-right-exit-left {
+  transform: translateX(120%) scale(1);
+  opacity: 0;
+}
+
+.custome-modal.enter-right-exit-left.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* وقتی show برداشته میشه → خروج از چپ */
+.custome-modal.enter-right-exit-left.close {
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+
+/* ============================
+   Enter Left → Exit Right
+============================ */
+/* ============================
+   Enter Left → Exit Right
+============================ */
+.custome-modal.enter-left-exit-right {
+  transform: translateX(-120%) scale(1);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.custome-modal.enter-left-exit-right.show {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+/* وقتی show برداشته میشه → خروج از راست (اینجا باید translateX باشه) */
+.custome-modal.enter-left-exit-right.close {
+  transform: translateX(120%) scale(1);
+  opacity: 0;
+}
+

@@ -1,0 +1,33 @@
+        #sky svg {
+          animation: lightning 4s ease-in-out infinite;
+          position: fixed;
+          top: 0;
+          right: -50px;
+          transform: translateX(-50%);
+        }
+
+        @keyframes lightning {
+          0% {
+            opacity: 0;
+          }
+
+          15% {
+            opacity: 0.8;
+          }
+
+          20% {
+            opacity: 0.1;
+          }
+
+          25% {
+            opacity: 1;
+          }
+
+          75% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }

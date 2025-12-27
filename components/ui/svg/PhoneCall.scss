@@ -1,0 +1,76 @@
+/* ---------- Neon Back Pulse (روی div اصلی) ---------- */
+.neon-back {
+  filter:
+    drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 12px var(--neon-color)) drop-shadow(0 0 28px color-mix(in oklab, var(--neon-color), transparent 20%));
+  }
+}
+
+/* ---------- Phone Shake ---------- */
+.phone-body {
+  transform-origin: center;
+  animation: phone-shake var(--ring-dur) ease-in-out infinite;
+}
+
+@keyframes phone-shake {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(5deg);
+  }
+
+  40% {
+    transform: rotate(-5deg);
+  }
+
+  60% {
+    transform: rotate(4deg);
+  }
+
+  80% {
+    transform: rotate(-4deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* ---------- Call Waves ---------- */
+.wave {
+  opacity: 0;
+  animation: wave-pulse var(--wave-dur) ease-out infinite;
+}
+
+.wave-2 {
+  animation-delay: calc(var(--wave-dur) / 3);
+}
+
+@keyframes wave-pulse {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

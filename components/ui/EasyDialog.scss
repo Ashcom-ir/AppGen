@@ -1,0 +1,145 @@
+.easy-dialog-modal-overlay {
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.easy-dialog-modal {
+  opacity: 0;
+  transform-origin: top center;
+  transform: perspective(900px) rotateX(-35deg) scale(0.9);
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.easy-dialog-modal.open {
+  animation-name: dialogBookOpen;
+  pointer-events: auto;
+}
+
+.easy-dialog-modal.close {
+  animation-name: dialogBookClose;
+  pointer-events: none;
+}
+
+/* ---------- Inner Content ---------- */
+
+.easy-dialog-content {
+  opacity: 0;
+  transform: translateY(22px);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+.easy-dialog-content.content-in {
+  animation-name: contentIn;
+  animation-delay: 0.3s;
+}
+
+.easy-dialog-content.content-out {
+  animation-name: contentOut;
+  animation-duration: 0.9s; /* نرم و هماهنگ */
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+}
+
+
+/* ---------- Book Style Animations ---------- */
+
+@keyframes dialogBookOpen {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-35deg) scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(12deg) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes dialogBookClose {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0px);
+  }
+  10% {
+    opacity: .9;
+    transform: translateX(5);
+    filter: blur(0px);
+  }
+  20% {
+    opacity: .8;
+    transform: translateX(10);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateX(15px);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.6;
+    transform: translateX(20px);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(25px);
+    filter: blur(2px);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translateX(30px);
+    filter: blur(4px);
+  }
+  70% {
+    opacity: 0.3;
+    transform: translateX(35px);
+    filter: blur(4px);
+  }
+  80% {
+    opacity: 0.2;
+    transform: translateX(40px);
+    filter: blur(4px);
+  }
+  90% {
+    opacity: 0.1;
+    transform: translateX(45px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50px);
+    filter: blur(8px);
+  }
+}
+
+/* ---------- Content Fade ---------- */
+
+@keyframes contentIn {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contentOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}

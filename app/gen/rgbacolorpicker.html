@@ -1,0 +1,144 @@
+<html>
+<header>
+<style>
+body {
+	background: #048;
+	background: -webkit-linear-gradient(left top, #027, #48a);
+	background: -moz-linear-gradient(bottom right, #027, #48a);
+	background: linear-gradient(to bottom right, #027, #48a);
+	background-attachment: fixed;
+	color: #fff;
+	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 140%;
+	margin: 0;
+	height: 100%;
+	padding: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.page_title {
+	font-weight: 300;
+  text-shadow: 0 1px 5px rgba(0,0,0,.8);
+	text-transform: uppercase;
+}
+
+/* COLOR PICKER STYLES ========== */
+.color_picker {
+	background: rgba(0,0,0,.2);
+  box-shadow: 0 1px 5px rgba(0,0,0,.8);
+	margin: 0 auto;
+	padding: 20px;
+	width: 300px;
+}
+.color {
+	-webkit-appearance: none;
+	border-radius: 2px;
+	display: block;
+	height: 10px;
+	margin: 20px 0;
+	width: 100%;
+}
+.color::-moz-range-track {
+	height: 0;
+}
+.color::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #aeaeae;
+  border-radius: 10%;
+	box-shadow: 0 0 4px rgba(0,0,0,.5);
+	cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+.color::-moz-range-thumb {
+  background: #aeaeae;
+  border-radius: 10%;
+	box-shadow: 0 0 4px rgba(0,0,0,.5);
+	cursor: pointer;
+  height: 20px;
+  width: 20px;	
+}
+
+.color.red {
+	background: #f00;
+	color: #f00;
+}
+.color.green {
+	background: #0f0;
+	color: #0f0;
+}
+.color.blue {
+	background: #00f;
+	color: #00f;
+}
+.color.opacity {
+	background: #aaa;
+	color: #aaa;
+}
+
+/* ----- OUTPUT */
+.output_box {
+	background: rgba(0,0,0,.2);
+  box-shadow: 0 1px 5px rgba(0,0,0,.8);
+  margin: 20px auto 40px;
+	max-width: 300px;
+	padding: 20px;
+	text-align: center;
+	width: 80%;
+}
+.output_value h2 {
+	font-weight: 300;
+	margin: 0 0 20px;
+}
+.output_color {
+	background: rgba(0,0,0,.2);
+  box-shadow: 0 1px 5px rgba(0,0,0,.8);
+	min-height: 200px;
+}
+</style>
+<script>
+function setColor() {
+  var valRed = document.querySelector('input.color.red').value;
+  var valGreen = document.querySelector('input.color.green').value;
+  var valBlue = document.querySelector('input.color.blue').value;
+  var valOpacity = document.querySelector('input.color.opacity').value / 100;
+
+  document.querySelector('.output_color').style.background =
+    'rgba(' + valRed + ',' + valGreen + ',' + valBlue + ',' + valOpacity + ')';
+
+  document.querySelector('.output_value h2 .output_r').textContent = valRed;
+  document.querySelector('.output_value h2 .output_g').textContent = valGreen;
+  document.querySelector('.output_value h2 .output_b').textContent = valBlue;
+  document.querySelector('.output_value h2 .output_a').textContent = valOpacity;
+}
+
+// call function
+setColor();
+
+</script>
+</header>
+
+<body>
+      <h1 class="page_title">Simple RGBA Color Picker</h1>
+
+      <div class="color_picker">
+            <input type="range" class="color red" min="0" max="255" value="0" oninput="setColor()" />
+            <input type="range" class="color green" min="0" max="255" value="140" oninput="setColor()" />
+            <input type="range" class="color blue" min="0" max="255" value="255" oninput="setColor()" />
+            <input type="range" class="color opacity" min="0" max="100" value="100" oninput="setColor()" />
+      </div>
+
+      <div class="output_box">
+            <div class="output_value">
+                  <h2>Color: rgba(<span class="output_r">0</span>, <span class="output_g">0</span>, <span
+                              class="output_b">0</span>, <span class="output_a">0</span>)</h2>
+            </div>
+            <div class="output_color"></div>
+      </div>
+</body>
+<footer></footer>
+
+</html>

@@ -1,0 +1,39 @@
+.svg-mobile-number {
+
+  .phone {
+    fill: none;
+    stroke: var(--stroke_color, #6b7280);
+    stroke-width: 1.6; // نازکتر
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    transform-origin: 12px 12px;
+    animation: phone-shake 2.5s ease-in-out infinite, neon-shadow 1.5s ease-in-out infinite;
+  }
+
+  .spark {
+    fill: var(--fill_color, #22c55e);
+    opacity: 0;
+    animation: spark 1.2s ease-in-out infinite;
+  }
+
+  @keyframes spark {
+    0% { opacity: 0; transform: scale(0.2); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.2); }
+  }
+
+  @keyframes phone-shake {
+    0% { transform: rotate(-4deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes neon-shadow {
+    0%, 100% { filter: drop-shadow(0 0 2px var(--neon-color)); }
+    50% { filter: drop-shadow(0 0 6px var(--neon-color)); }
+  }
+}

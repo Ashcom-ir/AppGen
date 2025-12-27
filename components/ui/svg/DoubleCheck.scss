@@ -1,0 +1,55 @@
+/* ---------- Neon Back Pulse ---------- */
+.neon-back {
+  filter:
+    drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 12px var(--neon-color)) drop-shadow(0 0 28px color-mix(in oklab, var(--neon-color), transparent 20%));
+  }
+}
+
+.tick-base {
+  stroke: var(--neon-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: draw-check var(--draw-dur) forwards;
+}
+
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* مسیر strike — نئون متحرک روی همان paths */
+.tick-strike {
+  stroke: var(--strike-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 6 34;
+  stroke-dashoffset: 0;
+  animation: strike-loop var(--strike-dur) linear infinite;
+  filter:
+    drop-shadow(0 0 4px var(--neon-color)) drop-shadow(0 0 10px var(--strike-drop));
+}
+
+@keyframes strike-loop {
+  to {
+    stroke-dashoffset: 40;
+  }
+}

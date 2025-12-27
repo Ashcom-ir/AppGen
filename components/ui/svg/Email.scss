@@ -1,0 +1,57 @@
+.svgEmail {
+  stroke: var(--neon-color);
+  stroke-width: 2;
+  
+  // فیلتر اولیه و انیمیشن پالس
+  filter: 
+    drop-shadow(0 0 calc(2px * var(--glow)) var(--neon-color)) 
+    drop-shadow(0 0 calc(6px * var(--glow)) var(--neon-color));
+  animation: neon-pulse 2.3s ease-in-out infinite;
+
+  .draw {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: draw-anim var(--draw-dur) forwards ease-out;
+  }
+
+  .strike {
+    stroke: var(--strike-color);
+    stroke-width: 2.5;
+    stroke-dasharray: 10 90; // ۱۰ واحد طول نور، ۹۰ واحد فاصله
+    stroke-dashoffset: 100;
+    animation: strike-anim var(--strike-dur) linear infinite;
+    // تاخیر برای اینکه اول انیمیشن Draw تمام شود یا نیمه‌کاره باشد
+    animation-delay: 0.5s; 
+    filter: 
+      drop-shadow(0 0 4px var(--neon-color)) 
+      drop-shadow(0 0 10px var(--strike-drop));
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 calc(4px * var(--glow)) var(--neon-color)) 
+      drop-shadow(0 0 calc(12px * var(--glow)) var(--neon-color));
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 calc(8px * var(--glow)) var(--neon-color)) 
+      drop-shadow(0 0 calc(20px * var(--glow)) var(--neon-color));
+  }
+}
+
+@keyframes draw-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strike-anim {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}

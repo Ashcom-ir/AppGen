@@ -1,0 +1,264 @@
+
+
+.guided-highlight {
+  animation: guided-pulse-classic 1.6s ease-in infinite;
+  &.enter {
+    animation: highlight-enter-pro 0.35s cubic-bezier(0.25, 1, 0.5, 1), guided-pulse-classic 1.6s ease-in-out infinite;
+  }
+  &.exit {
+    animation: highlight-exit-pro 0.25s ease-in, guided-pulse-classic 1.6s ease-in-out infinite;
+  } 
+}
+
+.guided-tooltip {
+  &.enter {
+    animation: tooltip-enter-pro 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+  &.exit {
+    animation: tooltip-exit-pro 0.25s ease-in forwards;
+  }
+}
+
+.guided-steps {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guided-step {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.guided-step.active {
+  background-color: var(--color-emerald-300);
+  box-shadow: 0 0 6px var(--color-emerald-300);
+  border-color: var(--color-emerald-200);
+}
+
+.guided-step.done {
+  background-color: var(--color-emerald-500);
+  border-color: var(--color-emerald-400);
+}
+
+
+@keyframes guided-pulse-classic {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0  var(--color-emerald-100);
+    }
+    70% {
+        transform: scale(1.01);
+        box-shadow: 0 0 0 10px rgba(37, 168, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 168, 255, 0);
+    }
+}
+
+/* ---------- tooltip enter/exit حرفه‌ای ---------- */
+@keyframes tooltip-enter-pro {
+  0% {
+    transform: translateY(-20px) scale(0.85) rotate(-2deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(10px) scale(1.05) rotate(1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+@keyframes tooltip-exit-pro {
+  0% { transform: skewX(0deg) scale(1); opacity:1; }
+  50% { transform: skewX(10deg) scale(1.05); opacity:0.8; }
+  100% { transform: skewX(-20deg) scale(0.8); opacity:0; }
+}
+
+/* ---------- highlight enter/exit روی step change ---------- */
+@keyframes highlight-enter-pro {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tooltip-exit-pro-org {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px) scale(0.85) rotate(-2deg);
+    opacity: 0;
+  }
+}
+/* 1. کلاسیک کوچک */
+@keyframes tooltip-exit-pro {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  100% { transform: translateY(-10px) scale(0.85); opacity:0; }
+}
+
+/* 4. پرش به بالا و ناپدید شدن 000*/
+@keyframes tooltip-exit-pro2 {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  30% { transform: translateY(-20px) scale(1.05); opacity:1; }
+  100% { transform: translateY(-40px) scale(0.8); opacity:0; }
+}
+
+/* 5. اسلاید به راست و کوچک شدن 000*/
+@keyframes tooltip-exit-pro3 {
+  0% { transform: translateX(0) scale(1); opacity:1; }
+  100% { transform: translateX(50px) scale(0.5); opacity:0; }
+}
+
+/* 6. اسلاید به چپ و کوچک شدن 000*/
+@keyframes tooltip-exit-pro4 {
+  0% { transform: translateX(0) scale(1); opacity:1; }
+  100% { transform: translateX(-50px) scale(0.5); opacity:0; }
+}
+
+/* 11. چرخش X 000*/
+@keyframes tooltip-exit-pro5 {
+  0% { transform: rotateX(0deg) scale(1); opacity:1; }
+  100% { transform: rotateX(90deg) scale(0.5); opacity:0; }
+}
+
+/* 17. scale + rotate + fade 000*/
+@keyframes tooltip-exit-pro6 {
+  0% { transform: scale(1) rotate(0deg); opacity:1; }
+  30% { transform: scale(1.1) rotate(10deg); opacity:0.9; }
+  60% { transform: scale(0.8) rotate(-10deg); opacity:0.6; }
+  100% { transform: scale(0) rotate(30deg); opacity:0; }
+}
+
+/* 20. fade + swing 000*/
+@keyframes tooltip-exit-pro7 {
+  0% { transform: translateY(0) rotate(0deg); opacity:1; }
+  25% { transform: translateY(-5px) rotate(10deg); opacity:0.9; }
+  50% { transform: translateY(-10px) rotate(-10deg); opacity:0.7; }
+  75% { transform: translateY(-15px) rotate(5deg); opacity:0.4; }
+  100% { transform: translateY(-20px) rotate(0deg); opacity:0; }
+}
+
+/* 22. slide پایین + flip ---------- 000*/
+@keyframes tooltip-exit-pro8 {
+  0% { transform: translateY(0) rotateX(0deg); opacity:1; }
+  100% { transform: translateY(40px) rotateX(90deg) scale(0.5); opacity:0; }
+}
+
+/* 25. slide راست + bounce ---------- 000*/
+@keyframes tooltip-exit-pro9 {
+  0% { transform: translateX(0) scale(1); opacity:1; }
+  30% { transform: translateX(20px) scale(1.05); opacity:1; }
+  60% { transform: translateX(-10px) scale(0.95); opacity:0.7; }
+  100% { transform: translateX(50px) scale(0); opacity:0; }
+}
+
+/* 41. Spiral out & shrink 000*/
+@keyframes tooltip-exit-pro10 {
+  0% { transform: translate(0,0) scale(1) rotate(0deg); opacity:1; }
+  25% { transform: translate(10px,-10px) scale(0.9) rotate(45deg); opacity:0.9; }
+  50% { transform: translate(-15px,-20px) scale(0.7) rotate(120deg); opacity:0.7; }
+  75% { transform: translate(20px,-30px) scale(0.5) rotate(200deg); opacity:0.4; }
+  100% { transform: translate(-30px,-50px) scale(0) rotate(360deg); opacity:0; }
+}
+
+/* 43. Vertical squash & fade 000*/
+@keyframes tooltip-exit-pro11 {
+  0% { transform: scaleY(1) scaleX(1); opacity:1; }
+  50% { transform: scaleY(1.2) scaleX(0.8); opacity:0.8; }
+  100% { transform: scaleY(0) scaleX(0.5); opacity:0; }
+}
+
+/* 44. Horizontal squash & swing 000*/
+@keyframes tooltip-exit-pro12 {
+  0% { transform: scaleX(1) scaleY(1); opacity:1; }
+  30% { transform: scaleX(1.3) scaleY(0.8) rotate(5deg); opacity:1; }
+  60% { transform: scaleX(0.7) scaleY(1.1) rotate(-5deg); opacity:0.7; }
+  100% { transform: scaleX(0) scaleY(0.5) rotate(0deg); opacity:0; }
+}
+
+/* 46. Zig-zag & shrink 000*/
+@keyframes tooltip-exit-pro13 {
+  0% { transform: translate(0,0) scale(1); opacity:1; }
+  25% { transform: translate(15px,-10px) scale(0.9); opacity:0.9; }
+  50% { transform: translate(-15px,-20px) scale(0.7); opacity:0.7; }
+  75% { transform: translate(10px,-30px) scale(0.5); opacity:0.4; }
+  100% { transform: translate(-10px,-40px) scale(0); opacity:0; }
+}
+/* 58. Rotate X swing 000*/
+@keyframes tooltip-exit-pro14 {
+  0% { transform: rotateX(0deg) translateY(0); opacity:1; }
+  25% { transform: rotateX(15deg) translateY(-5px); opacity:0.9; }
+  50% { transform: rotateX(-10deg) translateY(-10px); opacity:0.7; }
+  100% { transform: rotateX(90deg) translateY(-20px); opacity:0; }
+}
+
+/* 60. Wave vanish */
+@keyframes tooltip-exit-pro15 {
+  0% { transform: translateY(0) scale(1) rotate(0deg); opacity:1; }
+  25% { transform: translateY(-5px) scale(1.05) rotate(5deg); opacity:0.9; }
+  50% { transform: translateY(-10px) scale(0.95) rotate(-5deg); opacity:0.7; }
+  75% { transform: translateY(-15px) scale(1.02) rotate(2deg); opacity:0.4; }
+  100% { transform: translateY(-20px) scale(0) rotate(0deg); opacity:0; }
+}
+
+@keyframes tooltip-exit-pro16 {
+  0% {
+    background-color: #22c55e;
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: rotate(3deg) scale(1.05);
+    opacity: 0.9;
+  }
+  40% {
+    transform: rotate(-3deg) scale(1.05);
+    opacity: 0.8;
+  }
+  60% {
+    transform: rotate(1deg) scale(0.95);
+    opacity: 0.7;
+  }
+  80% {
+    transform: rotate(-1deg) scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+@keyframes highlight-exit-pro01 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.92);
+    opacity: 0.4;
+  }
+}

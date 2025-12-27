@@ -1,0 +1,78 @@
+.border-layer {
+  border-radius: inherit;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.border-dot {
+  width: var(--dot-size, 40px);
+  aspect-ratio: 1;
+  background: linear-gradient(to left,
+      transparent,
+      var(--color-from, #98ffe7),
+      var(--color-to, #00691737),
+      transparent);
+
+  offset-path: rect(0px auto auto 0px round var(--radius, 40px));
+  offset-rotate: 0deg;
+
+  animation:
+    border-first var(--first-duration, 5s) linear 1,
+    border-loop var(--duration, 3s) linear infinite;
+  animation-delay: 0s, var(--first-duration, 5s);
+}
+
+
+@keyframes border-first {
+  0% {
+    offset-distance: 0%;
+  }
+
+  20% {
+    offset-distance: 8%;
+  }
+
+  40% {
+    offset-distance: 35%;
+  }
+
+  65% {
+    offset-distance: 55%;
+  }
+
+  85% {
+    offset-distance: 90%;
+  }
+
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes border-loop {
+  0% {
+    offset-distance: 0%;
+  }
+
+  18% {
+    offset-distance: 6%;
+  }
+
+  38% {
+    offset-distance: 32%;
+  }
+
+  60% {
+    offset-distance: 52%;
+  }
+
+  82% {
+    offset-distance: 88%;
+  }
+
+  100% {
+    offset-distance: 100%;
+  }
+}

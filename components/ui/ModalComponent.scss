@@ -1,0 +1,47 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop.modal-backdrop-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 32rem;
+  margin: 1rem;
+  position: relative;
+  z-index: 50;
+  transform-style: preserve-3d;
+  transform-origin: right center;
+  perspective: 800px;
+}
+
+.modal-container.modal-open {
+  animation: modalOpenAnim 0.9s cubic-bezier(0.25,0.1,0.25,1) forwards;
+}
+
+.modal-container.modal-close {
+  animation: modalCloseAnim 0.45s cubic-bezier(0.25,0.1,0.25,1) forwards;
+}
+
+@keyframes modalOpenAnim {
+  0% { opacity: 0; transform: rotateY(90deg); }
+  100% { opacity: 1; transform: rotateY(0deg); }
+}
+
+@keyframes modalCloseAnim {
+  0% { opacity: 1; transform: rotateY(0deg); }
+  100% { opacity: 0; transform: rotateY(90deg); }
+}

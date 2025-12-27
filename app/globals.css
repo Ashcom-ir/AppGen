@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --ag-color-gray-900: #1d2628;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(16, 185, 129, 0.01) inset !important;
+    -webkit-text-fill-color: #d1fae5 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.bg-custom-gray-900{
+  background-color: var(--ag-color-gray-900);
+}
+.border-custom-gray-900{
+  border-color: var(--ag-color-gray-900);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+/* @font-face {
+    font-family: 'Yekan';
+    src: url('/fonts/YekanBakh-Regular.woff2') format('woff2'),
+        url('/fonts/YekanBakh-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+.custome-anim {
+  transform: scale(1);
+  transition: all 0.5s ease;
+}
+.custome-anim.slide-right {
+  transform: translateX(120%) scale(.9);
+  opacity: 0;
+}
+
+.custome-anim.slide-right.show {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.custome-anim.slide-left {
+  transform: translateX(-120%) scale(.9);
+  opacity: 0;
+}
+
+.custome-anim.slide-left.show {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  direction: rtl;
+}

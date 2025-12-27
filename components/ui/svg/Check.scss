@@ -1,0 +1,53 @@
+/* ---------- Neon Back Pulse ---------- */
+.neon-back {
+  filter:
+    drop-shadow(0 0 6px var(--neon-color))
+    drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 6px var(--neon-color))
+      drop-shadow(0 0 16px color-mix(in oklab, var(--neon-color), transparent 50%));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 12px var(--neon-color))
+      drop-shadow(0 0 28px color-mix(in oklab, var(--neon-color), transparent 20%));
+  }
+}
+
+/* ---------- path اصلی ---------- */
+.check-base {
+  stroke: var(--neon-color);
+  stroke-dasharray: 40;
+  stroke-dashoffset: -40; /* شروع از راست */
+  animation: draw-check var(--draw-dur) forwards;
+}
+
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0; /* کشیده شدن از راست به چپ */
+  }
+}
+
+/* ---------- strike متحرک ---------- */
+.check-strike {
+  stroke: var(--check-strike-color);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 34; /* خط کوتاه روی مسیر */
+  stroke-dashoffset: 0;
+  animation: strike-loop var(--strike-dur) linear infinite;
+  filter:
+    drop-shadow(0 0 4px var(--neon-color))
+    drop-shadow(0 0 10px var(--check-strike-drop-color));
+}
+
+@keyframes strike-loop {
+  to {
+    stroke-dashoffset: 40; /* حرکت از چپ به راست */
+  }
+}

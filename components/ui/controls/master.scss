@@ -1,0 +1,19 @@
+/* اسلاید خروج به راست */
+.slide-out-right {
+      animation: slideOutRight 0.45s ease forwards;
+}
+
+@keyframes slideOutRight {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(60px); }
+}
+
+/* اسلاید ورود از چپ */
+.slide-in-left {
+      animation: slideInLeft 0.45s ease forwards;
+}
+
+@keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to   { opacity: 1; transform: translateX(0); }
+}

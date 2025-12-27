@@ -1,0 +1,32 @@
+#shield-guard {
+      animation:
+            lightning 0s ease 1,
+            lightning 4s ease-in-out infinite;
+      animation-delay: 0s,8.4s ;
+}
+
+@keyframes lightning {
+      0% {
+            opacity: 0;
+      }
+
+      15% {
+            opacity: 0.8;
+      }
+
+      20% {
+            opacity: 0.1;
+      }
+
+      25% {
+            opacity: 1;
+      }
+
+      75% {
+            opacity: 0;
+      }
+
+      100% {
+            opacity: 0;
+      }
+}

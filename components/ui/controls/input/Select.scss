@@ -1,0 +1,73 @@
+/* @reference در بالای این فایل باید اضافه شود اگر با Tailwind 4 مشکل دارید */
+
+.custom-select-container {
+
+      // حذف متغیرهای رنگی که با کلاس‌های Tailwind جایگزین شدند
+      ul>li:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            /* border-white/10 معادل Tailwind */
+      }
+
+      .select-trigger {
+            // اگر استایل نئون یا رنگ خاصی دارید، اینجا اعمال می‌شود
+            // مثال:
+            /*
+        &:hover {
+            border-color: var(--neon);
+            box-shadow: 0 0 10px rgba(0, 230, 118, 0.1);
+        }
+        */
+
+            &.active {
+                  // استایل‌های فعال بودن
+            }
+
+            .chevron {
+                  &.rotate {
+                        transform: rotate(180deg);
+                        // color: var(--neon); // از Tailwind color استفاده کنید یا اگر نئون دارید، این را نگه دارید.
+                  }
+            }
+      }
+
+      .select-menu {
+            transform-origin: top;
+            top: 100%;
+
+            // انیمیشن باز و بسته شدن
+            &.menu-open {
+                  animation: slideIn 0.3s ease-out forwards;
+                  pointer-events: all;
+            }
+
+            &.menu-closed {
+                  animation: slideOut 0.2s ease-in forwards;
+                  pointer-events: none;
+            }
+      }
+}
+
+// Keyframes برای انیمیشن
+@keyframes slideIn {
+      from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+      }
+
+      to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+      }
+}
+
+@keyframes slideOut {
+      from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+      }
+
+      to {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+      }
+}

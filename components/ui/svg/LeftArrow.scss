@@ -1,0 +1,24 @@
+.animation-left-arrow{
+      animation: moveScaleFade 0.9s infinite linear
+}
+@keyframes moveScaleFade {
+      0% {
+            transform: translateX(8px) scale(1);
+            opacity: 1;
+      }
+
+      70% {
+            transform: translateX(0px) scale(0.1);
+            opacity: 1;
+      }
+
+      90% {
+            transform: translateX(0px) scale(0.1);
+            opacity: 0;
+      }
+
+      100% {
+            transform: translateX(8px) scale(1);
+            opacity: 0;
+      }
+}

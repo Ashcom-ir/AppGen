@@ -1,0 +1,30 @@
+.typewrite {
+  direction: rtl;
+  border-left: 2px solid rgba(255,255,255,.75);
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);
+  width: 0;  /* ← نقطه شروع */
+  animation: typing 4s steps(40) forwards,
+             blink 500ms infinite;
+}
+
+/* مخفی برای محاسبه width */
+.hidden-span {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+}
+.typewrite-cursor{
+  opacity: 1; 
+  animation: typing 4s steps(40) forwards,
+             blink 500ms infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to   { width: var(--targetWidth); }  /* ← مقدار دقیق متن */
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
