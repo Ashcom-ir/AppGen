@@ -1,13 +1,15 @@
 "use client";
 
 import AnimatedBorder from "@/components/ui/AnimatedBorder";
-import BgColorPickerMaster from "@/components/ui/bg-color-picker/BgColorPickerMaster";
+import BgColorPickerMaster from "@/components/ui/generator/BgColorPickerMaster";
+import AppInfo from "@/components/ui/generator/AppInfo";
 import ContextMenu from "@/components/ui/controls/color-picker/ContextMenu";
+import FormGenerator from "@/components/ui/generator/FormGenerator";
 export default function GenClientPage() {
 
       return (
             <main className="relative flex items-center justify-center bg-transparent min-h-screen overflow-hidden">
-                  <div className={`w-full min-h-screen`}>
+                  <div className={`w-full min-h-screen hidden`}>
                         {/* <ContextMenu target="#divLightTheme" />
                         <ContextMenu target="#divDarkTheme" /> */}
                         <BgColorPickerMaster hue={20}
@@ -31,6 +33,12 @@ export default function GenClientPage() {
                               <ButtomNav className='bottom-1 left-1/2' />
                         </div> */}
 
+                  </div>
+                  <div className={`w-full min-h-screen hidden`}>
+                        <AppInfo />
+                  </div>
+                  <div className={`w-full min-h-screen`}>
+                        <FormGenerator />
                   </div>
             </main>
       );

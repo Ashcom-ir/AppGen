@@ -24,7 +24,9 @@ export default function RulerSlider({
   const labelRef = useRef(null);
   const scaleRef = useRef(null);
   const knobRef = useRef(null);
-  const [shadow, setShadow] = useState('#ffffff00');
+  //const lastShadow = useRef(null);
+
+  //const [shadow, setShadow] = useState('#ffffff00');
   const totalTicks = Math.floor(max / minor);
   const trackHeight = height - knobSize;
   const unitHeight = (height - knobSize) / totalTicks;
@@ -70,6 +72,7 @@ export default function RulerSlider({
     let initColor2;
     let initBorderColor;
     let counterColor;
+    let newShadow;
     if (limitMin == 0 && limitMax == 100) {
       const hueStart = 0;
       const hueEnd = 120;
@@ -80,11 +83,10 @@ export default function RulerSlider({
     }
 
     initColor = `hsl(${hue}, 80%, ${lightness}%)`;
-    initColor2 = `hsla(${hue}, 70%, ${Math.min(lightness + 7, 95)}%,.5)`;
+    initColor2 = `hsla(${hue}, 70%, ${lightness + 7}%,.65)`;
     counterColor = `hsl(${hue}, 80%, 88%)`;
-    initBorderColor = `hsla(${hue}, 90%, ${Math.min(lightness + 15, 95)}%,.5)`;
-
-    setShadow(`hsla(${hue}, 80%, ${lightness}%, 0.5)`);
+    initBorderColor = `hsla(${hue}, 90%, ${lightness + 10}%,.65)`;
+    newShadow = `hsla(${hue}, 90%, ${lightness -2}%,.75)`;
 
     const knob = knobRef.current;
 
@@ -94,6 +96,8 @@ export default function RulerSlider({
     counterRef.current.style.color = `${counterColor}`;
     labelRef.current.style.color = `${counterColor}`;
     lineRef.current.style.stroke = initColor;
+    knob.style.boxShadow = `-20px 0px 20px 6px ${newShadow}, inset 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px ${newShadow}`;
+
   };
 
 
@@ -103,13 +107,13 @@ export default function RulerSlider({
     const rangePx = rulerM * pixelsPerUnit;
     const centerX = 30;
     let d = `M ${centerX} 0 `;
-    const curveStart = Math.max(0, centerY - rangePx);
-    const curveEnd = Math.min(height, centerY + rangePx);
+    const curveStart = Math.max(-1, centerY - rangePx);
+    const curveEnd = Math.min(height+1, centerY + rangePx);
     const linePath = lineRef.current;
     d += `L ${centerX} ${curveStart} `;
     const steps = 50;
 
-    for (let y = curveStart; y <= curveEnd; y += (rangePx * 2) / steps) {
+    for (let y = curveStart-2; y <= curveEnd-2; y += (rangePx * 2) / steps) {
       const distY = Math.abs(y - centerY);
       const distUnit = distY / pixelsPerUnit;
 
@@ -236,16 +240,27 @@ export default function RulerSlider({
     });
   }, [value, max, height, knobSize, minor, rulerM, inputD]);
 
+  // قبل از return
+
   useEffect(() => {
-    setKnobColor(value);
+    setKnobColor(value);          // فقط init
     const knobTop = (1 - value / max) * (height - knobSize);
     updateLineWave(knobTop);
-  }, [value]);
+  }, []); // ← mount only
+
+
+useEffect(() => {
+  setKnobColor(value);
+  const knobTop = (1 - value / max) * (height - knobSize);
+  if (knobRef.current) knobRef.current.style.top = `${knobTop}px`;
+  updateLineWave(knobTop);
+}, [value]);
+
 
   return (
     <div id={id} className="ruler-wrap">
       <div className="ruler-scale" ref={scaleRef}></div>
-      <div ref={barRef} className="ruler-bar" style={{ "--shadow": shadow, width, height }}>
+      <div ref={barRef} className="ruler-bar" style={{ "--shadow": "#fff", width, height }}>
         <svg className="ruler-line-svg">
           <path ref={lineRef} className="ruler-path" id="ruler-line-path" d=""></path>
         </svg>

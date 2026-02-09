@@ -6,10 +6,11 @@ import Brush from "@/components/ui/svg/Brush";
 import MultiColor from "@/components/ui/svg/MultiColor";
 import Image from "@/components/ui/svg/Image";
 
-export default function ButtomNav({ id="buttomNav" , className }) {
+export default function ButtomNav({ id="buttomNav" , className, onChange }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (index, fn) => {
     setActiveIndex(index);
+    if (onChange) onChange(index);
     if (fn) fn();
   };
   const navItems = [
@@ -73,6 +74,7 @@ export default function ButtomNav({ id="buttomNav" , className }) {
 
   useEffect(() => {
     setActiveIndex(0);
+    if (onChange) onChange(0);
   }, []);
 
   return (

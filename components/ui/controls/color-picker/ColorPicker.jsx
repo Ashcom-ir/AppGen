@@ -29,69 +29,58 @@ function hsl2rgb(h, s, l) {
 //const a = opacity / 100;
 //const rgba = `rgba(${r}, ${g}, ${b}, ${a})`;
 export default function ColorPicker({ hueVal, saturationVal, lightnessVal, opacityVal, isDark = false, limitMin = 0, limitMax = 100, onChange = () => { } }) {
-      const [color, setColor] = useState({
-            hue: hueVal,
-            saturation: saturationVal,
-            lightness: lightnessVal,
-            opacity: opacityVal,
-      });
-  useEffect(() => {
-    onChange(color);
-  }, [color, onChange]);
-
-  const updateColor = (key, value) => {
-    setColor((prev) => ({ ...prev, [key]: value }));
-  };
-
+      const updateColor = (key, value) => {
+            // فقط مقدار تغییر کرده رو پاس بده
+            onChange({
+                  hue: key === 'hue' ? value : hueVal,
+                  saturation: key === 'saturation' ? value : saturationVal,
+                  lightness: key === 'lightness' ? value : lightnessVal,
+                  opacity: key === 'opacity' ? value : opacityVal,
+            });
+      };
 
       return (
-            <div className="relative w-full h-full">
+            <div key={`ColorPicker${isDark ? "Dark" : "Light"}`} className="relative w-full h-full">
                   <div className="absolute inset-0 pointer-events-none rounded-md backdrop-blur-12 bg-neutral-900/10">
                         <div style={{ background: `linear-gradient(-30deg, oklch(from var(--color-neutral-500) l c h), transparent, var(--color-neutral-500))` }} className="transform-[scale(.99)] opacity-[.3] blur-[32px] rounded-lg border-pink-500 absolute inset-0"></div>
                   </div>
-                  <div className="flex gap-4 mx-2 py-2.5 items-center justify-center">
-                        <RulerSlider
-                              id={`div${isDark ? "Dark" : "Light"}Opacity`}
-                              value={color.opacity}
-                              setValue={(v) => updateColor("opacity", v)}
-                              label="شفافیت"
-                              width={20}
-                              height={200}
-
-                        />
-                        <RulerSlider
-                              id={`div${isDark ? "Dark" : "Light"}Saturation`}
-                              value={color.saturation}
-                              setValue={(v) => updateColor("saturation", v)}
-                              label="اشباع"
-                              width={20}
-                              height={200}
-                        />
-                        <RulerSlider
-                              id={`div${isDark ? "Dark" : "Light"}Lightness`}
-                              value={color.lightness}
-                              setValue={(v) => updateColor("lightness", v)}
-                              label="روشنایی"
-                              width={20}
-                              height={200}
-                              limitMin={limitMin}
-                              limitMax={limitMax}
-                              isDark={isDark}
-                        />
-                        <HueRulerSlider
-                              id={`div${isDark ? "Dark" : "Light"}HueRuler`}
-                              label="رنگ"
-                              value={color.hue}
-                              saturation={color.saturation}
-                              lightness={color.lightness}
-                              opacity={color.opacity}
-                              setValue={(v) => updateColor("hue", v)}
-                              width={20}
-                              height={200}
-                        />
+                  <div className="flex gap-4 mx-2 py-2 items-center justify-center">
+                        <div className="flex gap-4 mx-2 py-2 items-center justify-center">
+                              <RulerSlider
+                                    value={opacityVal}
+                                    setValue={(v) => onChange({ key: "opacity", value: v })}
+                                    label="شفافیت"
+                                    width={20}
+                                    height={200}
+                              />
+                              <RulerSlider
+                                    value={saturationVal}
+                                    setValue={(v) => onChange({ key: "saturation", value: v })}
+                                    label="اشباع"
+                                    width={20}
+                                    height={200}
+                              />
+                              <RulerSlider
+                                    value={lightnessVal}
+                                    setValue={(v) => onChange({ key: "lightness", value: v })}
+                                    label="روشنایی"
+                                    width={20}
+                                    height={200}
+                                    limitMin={limitMin}
+                                    limitMax={limitMax}
+                                    isDark={isDark}
+                              />
+                              <HueRulerSlider
+                                    value={hueVal}
+                                    setValue={(v) => onChange({ key: "hue", value: v })}
+                                    label="رنگ"
+                                    width={20}
+                                    height={200}
+                              />
+                        </div>
                   </div>
                   <div className="relative mt-5 hidden">
-                        <div className="text-[#aaa] p-2 text-[15px] font-light text-center">{`hsl(${color.hue}, ${color.saturation}%, ${color.lightness}%)`}</div>
+                        <div className="text-[#aaa] p-2 text-[15px] font-light text-center">{`hsl(${hueVal}, ${saturationVal}%, ${lightnessVal}%)`}</div>
                         {/*<div className="text-[#aaa] p-2 text-[15px] font-light text-center">{`rgb(${r}, ${g}, ${b})`}</div>
                         <div className="text-[#aaa] p-2 text-[15px] font-light text-center">{ rgba }</div>*/}
                   </div>

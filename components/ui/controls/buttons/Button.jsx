@@ -4,7 +4,7 @@ export default function Button({
       icon,
       text = '',
       disabled = false,
-      text_color = "text-white",
+      text_color = "text-white hover:bg-white/11",
       border = "rounded-sm border-white/20 hover:border-white/22 focus:border-white/24 active:border-white/26",
       hasBorder = "border",
       padding = "px-3 py-2",

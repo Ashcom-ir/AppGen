@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./GuidedTour.scss";
 import BorderAnimationPro from "../ui/controls/BorderAnimationPro";
 import Button from "@/components/ui/controls/buttons/Button";
@@ -11,11 +11,13 @@ const TOOLTIP_HEIGHT = 180;
 const MARGIN = 12;
 
 export default function GuidedTour({
+      isDark,
       steps = [],
-      open,
+      openGuidedTour,
       onClose,
       defaultPosition = "bottom",
 }) {
+      const ref = useRef(null);
       const [current, setCurrent] = useState(0);
       const [rect, setRect] = useState(null);
       const [animating, setAnimating] = useState(false);
@@ -48,8 +50,9 @@ export default function GuidedTour({
       }, [rect, current, steps]);
 
       useEffect(() => {
-            if (open) setCurrent(0);
-      }, [open]);
+            console.log("openXSSS");
+            if (openGuidedTour) setCurrent(0);
+      }, [openGuidedTour]);
 
       const changeStep = (newIndex) => {
             if (newIndex === current) return;
@@ -58,11 +61,12 @@ export default function GuidedTour({
             setTimeout(() => {
                   setCurrent(newIndex);
                   setAnimating(false);
+                  handleShowConfirm();
             }, 250);
       };
 
       useEffect(() => {
-            if (!open || !steps[current]) return;
+            if (!openGuidedTour || !steps[current]) return;
 
             const el = document.querySelector(steps[current].target);
             if (!el) return;
@@ -74,9 +78,9 @@ export default function GuidedTour({
                   width: r.width,
                   height: r.height,
             });
-      }, [current, open, steps]);
+      }, [current, openGuidedTour, steps]);
 
-      if (!open || !rect) return null;
+      if (!openGuidedTour || !rect) return null;
 
       const isFirst = current === 0;
       const isLast = current === steps.length - 1;
@@ -112,14 +116,31 @@ export default function GuidedTour({
 
       top = Math.max(MARGIN, Math.min(top, viewportH - TOOLTIP_HEIGHT - MARGIN));
       left = Math.max(MARGIN, Math.min(left, viewportW - TOOLTIP_WIDTH - MARGIN));
+      const handleShowConfirm = (newIndex) => {
+            if (newIndex === selectedGuidIndex) return;
 
+            setPrevIndex(selectedGuidIndex);
+            //setAnimateOut(true);   // خروج آیتم فعلی
+            console.log(selectedGuidIndex);
+
+            setTimeout(() => {
+                  setSelectedGuidIndex(newIndex);
+                  //setAnimateOut(false);
+                  //setAnimateIn(true);  // ورود آیتم جدید
+
+                  setTimeout(() => {
+                        //setAnimateIn(false);
+                        setPrevIndex(null);
+                  }, 2000);
+            }, 2000);
+      };
       return (
-            <div className="fixed inset-0 z-9999">
-                  <div id="guided-overlay" className="absolute inset-0 z-1 bg-white/10 dark:bg-black/10 backdrop-blur-xl" />
+            <div ref={ref} className="fixed inset-0 z-9999">
+                  <div className="absolute inset-0 z-1 bg-white/10 dark:bg-black/10 backdrop-blur-xl" />
                   <div id="guided-unblur" className={`absolute overflow-hidden rounded-lg z-2 pointer-events-none guided-highlight ${animating ? "exit" : "enter"}`} style={{ top: rect.top, left: rect.left, width: rect.width, height: rect.height, }} />
                   <div className={`absolute shadow-white/22 bg-white/6 dark:bg-black/6 dark:shadow-black/22 shadow-[0_20px_40px] backdrop-blur-3xl w-[360px] rounded-md z-3 pointer-events-auto guided-tooltip ${animating ? "exit" : "enter"}`} style={{ top, left }}>
                         <div className="flex p-5 justify-between items-center gap-2">
-                              <div className="text-[14px] text-white/70 dark:text-white/60 text-shadow-[0_0_10px] text-shadow-white/70 dark:text-shadow-white/60">{steps[current].content}</div>
+                              <div className="text-[14px] font-semibold text-white/70 dark:text-white/60 text-shadow-[0_0_10px] text-shadow-white/70 dark:text-shadow-white/60">{steps[current].content}</div>
                               <Button id="btnCloseGuid"
                                     show={true}
                                     icon={

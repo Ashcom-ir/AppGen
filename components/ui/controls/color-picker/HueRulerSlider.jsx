@@ -7,9 +7,6 @@ export default function HueRulerSlider({
   label = "lbl",
   value,
   setValue,
-  saturation = 100,
-  lightness = 50,
-  opacity = 100,
   width = 20,
   height = 400,
   knobSize = 35,
@@ -24,7 +21,6 @@ export default function HueRulerSlider({
   const labelRef = useRef(null);
   const scaleRef = useRef(null);
   const knobRef = useRef(null);
-  const [shadow, setShadow] = useState("#ffffff00");
 
   const totalTicks = Math.floor(max / minor);
   const trackHeight = height - knobSize;
@@ -60,10 +56,10 @@ export default function HueRulerSlider({
     const rangePx = rulerM * pixelsPerUnit;
     const centerX = 30;
     let d = `M ${centerX} 0 `;
-    const curveStart = Math.max(0, centerY - rangePx);
-    const curveEnd = Math.min(height, centerY + rangePx);
+    const curveStart = Math.max(-1, centerY - rangePx);
+    const curveEnd = Math.min(height+1, centerY + rangePx);
 
-    for (let y = curveStart; y <= curveEnd; y += (rangePx * 2) / 50) {
+    for (let y = curveStart-2; y <= curveEnd-2; y += (rangePx * 2) / 50) {
       const distY = Math.abs(y - centerY);
       const distUnit = distY / pixelsPerUnit;
       let offset = 0;
@@ -81,7 +77,7 @@ export default function HueRulerSlider({
   // آپدیت knob و رنگ و counter
   useEffect(() => {
     const knobTop = (1 - value / max) * trackHeight;
-
+    let newShadow;
     if (knobRef.current) {
       knobRef.current.style.top = `${knobTop}px`;
 
@@ -89,10 +85,11 @@ export default function HueRulerSlider({
       const step = value % 10;
       const invertedStep = 9 - step;
       const knobLightness = 30 + invertedStep * 3;
-      knobRef.current.style.background = `linear-gradient(135deg, hsl(${value},80%,${knobLightness}%), hsla(${value},70%,${Math.min(knobLightness+7,95)}%,.5))`;
-      knobRef.current.style.borderColor = `hsla(${value},90%,${Math.min(knobLightness+15,95)}%,.5)`;
+      knobRef.current.style.background = `linear-gradient(135deg, hsl(${value},80%,${knobLightness}%), hsla(${value},70%,${Math.min(knobLightness + 7, 95)}%,.5))`;
+      knobRef.current.style.borderColor = `hsla(${value},90%,${Math.min(knobLightness + 15, 95)}%,.5)`;
+      newShadow = `hsla(${value}, 90%, ${knobLightness - 2}%,.75)`;
+      knobRef.current.style.boxShadow = `-20px 0px 20px 6px ${newShadow}, inset 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px ${newShadow}`;
 
-      setShadow(`hsla(${value}, 80%, ${knobLightness}%, 0.5)`);
     }
 
     if (counterRef.current) {
@@ -179,7 +176,7 @@ export default function HueRulerSlider({
   return (
     <div id={id} className="ruler-wrap">
       <div className="ruler-scale" ref={scaleRef}></div>
-      <div ref={barRef} className="ruler-bar" style={{ "--shadow": shadow, width, height }}>
+      <div ref={barRef} className="ruler-bar" style={{ width, height }}>
         <svg className="ruler-line-svg">
           <defs>
             <linearGradient id={`hueGradient${id}`} x1="0%" y1="100%" x2="0%" y2="0%">
@@ -187,7 +184,7 @@ export default function HueRulerSlider({
                 <stop
                   key={i}
                   offset={`${(i / 359) * 100}%`}
-                  stopColor={`hsla(${i},${saturation}%,${lightness}%,${opacity / 100})`}
+                  stopColor={`hsla(${i},100%,50%,1)`}
                 />
               ))}
             </linearGradient>

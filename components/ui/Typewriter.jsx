@@ -2,7 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import "./Typewriter.scss";
 
-export default function Typewriter({ text, speed = 50, show = true,hideAfterType = true,className='' }) {
+export default function Typewriter({
+  text,
+  speed = 50,
+  show = true,
+  hideAfterType = true,
+  className='',
+  onDone = () => {}
+}) {
   const [displayed, setDisplayed] = useState("");
   const [textWidth, setTextWidth] = useState(0);
 
@@ -10,6 +17,7 @@ export default function Typewriter({ text, speed = 50, show = true,hideAfterType
   const cursorRef = useRef(null);
 
   useEffect(() => {
+    if (!text) return;
     if (spanRef.current) {
       const width = spanRef.current.offsetWidth;
       setTextWidth(width);
@@ -17,29 +25,29 @@ export default function Typewriter({ text, speed = 50, show = true,hideAfterType
   }, [text]);
 
   useEffect(() => {
+    if (!text) return;
+    setDisplayed("");
     let i = 0;
     const interval = setInterval(() => {
       setDisplayed(text.slice(0, i + 1));
       i++;
       if (i === text.length) {
         clearInterval(interval);
+        onDone();
         if (hideAfterType && cursorRef.current) {
-          setTimeout(() => {
-            cursorRef.current?.classList.add("hidden");
-          }, 2000);
+          setTimeout(() => cursorRef.current?.classList.add("hidden"), 2000);
         }
       }
-    }, speed);
+    }, 1000 / speed);
 
     return () => clearInterval(interval);
   }, [text, speed]);
 
-  return (
-    show?
+  return show ? (
     <p className={`contents typewrite ${className}`} style={{ "--targetWidth": `${textWidth + 2}px` }}>
       <span ref={spanRef} className="hidden-span">{text}</span>
       {displayed}
-      <span ref={cursorRef} className="typewrite-cursor max-w-[1] border-none pr-1 bg-transparent caret-emerald-100/50 text-xl ">|</span>
-    </p>:""
-  );
+      <span ref={cursorRef} className="typewrite-cursor pr-1">|</span>
+    </p>
+  ) : null;
 }

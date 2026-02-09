@@ -1,0 +1,81 @@
+.upload {
+  transform: translateZ(0); // جلوگیری از لرزش GPU
+
+  // جلوه درگ جذاب
+  &:hover:not(.uploading):not(.done),
+  &.drag {
+    box-shadow: 0 0 35px #ff297599, inset 0 0 50px #ffffff15;
+    transform: scale(1.03);
+  }
+
+  .drop-text{ transition: .4s ease, transform .4s; }
+  .upload-text{ transition: .4s ease, transform .4s; }
+
+  /* شروع آپلود */
+  &.uploading {
+    .drop-text{ opacity:0; transform: translateY(-10px); }
+    .upload-text{ opacity:1; transform: translateY(10px); }
+    .progress-svg{ opacity:1; }
+  }
+
+  /* پروگرس + افکت نور */
+  .progress-svg {
+    transform: rotate(-90deg);
+    transition: opacity .3s ease;
+    circle.progress-circle{
+      fill:none;
+      stroke:#ff2975;
+      stroke-width:10;
+      filter: drop-shadow(0 0 10px #ff2975aa);
+      stroke-linecap:round;
+      stroke-dasharray:720;
+      transition:stroke-dashoffset .25s linear, filter .3s;
+    }
+  }
+
+  /* افکت حرکت نور روی بک */
+  .shine{
+    position:absolute;
+    inset:-100% -100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+    animation: shine 3s infinite linear;
+    pointer-events:none;
+    opacity:.1;
+  }
+
+  @keyframes shine{
+    0%{transform:translate(-50%,-50%) rotate(0);}
+    100%{transform:translate(50%,50%) rotate(360deg);}
+  }
+
+  /* پایان آپلود */
+  &.done{
+    .upload-text{ opacity:0; }
+    .progress-svg{ opacity:0; }
+
+    .check-svg{
+      opacity:1;
+      animation: pop .6s ease forwards;
+    }
+
+    .check-line{
+      fill:none;
+      stroke:#00ff9d;
+      stroke-width:12;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-dasharray:200;
+      stroke-dashoffset:200;
+      animation: checkDraw 1s forwards .2s;
+      filter:drop-shadow(0 0 10px #00ff9d);
+    }
+  }
+}
+.upload.error {
+  .drop-text{ opacity:0 !important; }
+  box-shadow:0 0 25px #ff3d3daa, inset 0 0 40px #ff000020;
+  border-color:#ff6b6b99;
+}
+
+@keyframes checkDraw{to{stroke-dashoffset:0;}}
+@keyframes pop{0%{transform:scale(.5);}100%{transform:scale(1);}}

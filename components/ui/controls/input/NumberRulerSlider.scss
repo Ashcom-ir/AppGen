@@ -1,0 +1,26 @@
+.number-ruler-wrap {
+  grid-template-columns: max-content auto max-content;
+  direction: ltr;
+  /*rotate: 90deg;*/
+}
+
+.number-scale-row {
+  transition: transform 0.1s linear, opacity 0.1s linear;
+}
+.number-ruler-path {
+  stroke-linecap: round;
+}
+.number-ruler-knob {
+  transition: box-shadow 0.2s ease, background 0.2s ease; 
+}
+.ruler-bar.dragging .ruler-knob {
+  transition: top 0.05s linear;
+}
+
+.min-max-label {
+  position: absolute;
+  left: -3ch;
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: bold;
+}
